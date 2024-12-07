@@ -74,7 +74,7 @@ public class MainForm extends JFrame {
         ticketPanels.clear();
 
         allRoutes = Main.getAlongTickets(stationModel.getElements(), dateField.getText());
-        List<List<TrainInfo>> route = applyFilter();
+        List<List<TrainInfo>> route = allRoutes;
         for(int i = 0, routeSize = route.size(); i < routeSize; i++){
             List<TrainInfo> trainInfos = route.get(i);
             JScrollPane scrollPane = new JScrollPane();
@@ -120,7 +120,14 @@ public class MainForm extends JFrame {
         JCheckBox checkBox = new JCheckBox(Main.byCode.get(station));
         checkBox.setBounds(x,y,100,20);
         checkBox.addActionListener(e -> {
-
+            List<List<TrainInfo>> route = applyFilter();
+            for(int i = 0, routeSize = route.size(); i < routeSize; i++) {
+                List<TrainInfo> trainInfos = route.get(i);
+                TicketList list = (TicketList) ((Container) ticketPanels.get(i).getComponent(0)).getComponent(0);
+                DefaultListModel<TrainInfo> model = (DefaultListModel<TrainInfo>) list.getModel();
+                model.clear();
+                model.addAll(trainInfos);
+            }
         });
         return checkBox;
     }
