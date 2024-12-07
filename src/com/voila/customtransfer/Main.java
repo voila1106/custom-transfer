@@ -3,6 +3,7 @@ package com.voila.customtransfer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -22,6 +23,7 @@ public class Main {
     public static void main(String[] args) throws Throwable {
         initStation();
 //        getTrain(byName.get("中山北"), byName.get("广州南"), "2024-12-20").forEach(System.out::println);
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         new MainForm().setVisible(true);
     }
 
